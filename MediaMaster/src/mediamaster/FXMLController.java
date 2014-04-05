@@ -71,7 +71,7 @@ public class FXMLController {
     @FXML // fx:id="videoPane"
     private TitledPane videoPane; // Value injected by FXMLLoader
 
-
+       //
     // Handler for Button[fx:id="buttonRefresh"] onAction
     @FXML
     void handleButtonAction(ActionEvent event) {
