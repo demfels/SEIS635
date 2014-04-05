@@ -4,19 +4,21 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="767.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="mediamaster.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="623.0" prefWidth="767.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="mediamaster.FXMLController">
   <children>
-    <Button id="button" fx:id="buttonRefresh" layoutX="14.0" layoutY="547.0" onAction="#handleButtonAction" text="Click Me!" />
+    <Button id="button" fx:id="buttonRefresh" layoutX="14.0" layoutY="547.0" onAction="#handleButtonAction" text="Refresh" />
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
     <Accordion layoutX="0.0" layoutY="83.0" prefHeight="450.0">
       <expandedPane>
-        <TitledPane fx:id="videoPane" animated="false" text="Video">
+        <TitledPane fx:id="videoPane" animated="false" minWidth="192.0" prefHeight="386.0" prefWidth="192.0" text="Video">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <ListView fx:id="listVideo" layoutX="0.0" layoutY="0.0" prefHeight="380.0" prefWidth="200.0" />
+                <ListView fx:id="listVideo" layoutX="0.0" layoutY="0.0" prefHeight="348.0" prefWidth="200.0" />
               </children>
             </AnchorPane>
           </content>
@@ -28,7 +30,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <ListView fx:id="listImage" layoutX="0.0" layoutY="-10.0" prefHeight="390.0" prefWidth="200.0" />
+                <ListView fx:id="listImage" layoutX="0.0" layoutY="-10.0" prefHeight="358.0" prefWidth="200.0" />
               </children>
             </AnchorPane>
           </content>
@@ -37,13 +39,41 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <ListView fx:id="listAudio" layoutX="0.0" layoutY="0.0" prefHeight="380.0" prefWidth="200.0" />
+                <ListView fx:id="listAudio" layoutX="0.0" layoutY="0.0" prefHeight="337.0" prefWidth="200.0" />
               </children>
             </AnchorPane>
           </content>
         </TitledPane>
       </panes>
     </Accordion>
-    <Pane blendMode="DARKEN" opacity="0.0" prefHeight="84.0" prefWidth="767.0" AnchorPane.bottomAnchor="510.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0" />
+    <Button fx:id="buttonOpen" layoutX="126.0" layoutY="547.0" mnemonicParsing="false" onMouseReleased="#openButtonEvent" text="Open" />
+    <ImageView fx:id="imageViewWindow" fitHeight="409.5" fitWidth="546.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="14.0" />
+    <Label fx:id="infoLabel" alignment="CENTER" prefHeight="450.0" prefWidth="546.0" text="Info Center" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="83.0" />
+    <Label layoutX="3.0" layoutY="41.0" prefHeight="42.0" prefWidth="764.0" text="Media Master">
+      <font>
+        <Font name="System Bold" size="25.0" />
+      </font>
+    </Label>
+    <TextField fx:id="textMediaDirectory" layoutX="351.0" layoutY="547.0" prefWidth="402.0" />
+    <Label layoutX="212.0" layoutY="551.0" text="Media Directory" />
+    <MenuBar layoutY="-1.0" prefHeight="42.0" prefWidth="767.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" fx:id="menuFileClose" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Import Media" fx:id="menuEditImport" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
   </children>
 </AnchorPane>
