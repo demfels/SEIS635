@@ -5,7 +5,9 @@
 
 package mediamaster;
 
+import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,11 +78,36 @@ public class FXMLController {
     @FXML
     void handleButtonAction(ActionEvent event) {
         // handle the event here
-        ObservableList<String> imageItems =FXCollections.observableArrayList ("Picture1", "Picture2", "PIctture3", "Picture4");
+        
+        FileSearch fs = new FileSearch();
+        ArrayList<File> list = fs.listAudio("C:\\MediaMaster");
+        String audioFiles="";
+        for (File fil : list)
+        {   
+            audioFiles=audioFiles+fil.getName();
+            System.out.println(fil.getPath());
+        }
+        
+        fs = new FileSearch();
+        list = fs.listImage("C:\\MediaMaster");
+        String imageFiles="";
+        for (File fil : list)
+        {   
+            imageFiles=imageFiles+fil.getName();
+            System.out.println(fil.getPath());
+        }
+        ObservableList<String> imageItems =FXCollections.observableArrayList (imageFiles);
         listImage.setItems(imageItems);
-        ObservableList<String> videoItems =FXCollections.observableArrayList ("video1", "video2", "video3", "video4");
-        listVideo.setItems(videoItems);
-        ObservableList<String> audioItems =FXCollections.observableArrayList ("audio1", "audio2", "audio3", "audio4");
+        
+        fs = new FileSearch();
+        list = fs.listVideo("C:\\MediaMaster");
+        String videoFiles="";
+        for (File fil : list)
+        {   
+            imageFiles=imageFiles+fil.getName();
+            System.out.println(fil.getPath());
+        }
+        ObservableList<String> audioItems =FXCollections.observableArrayList (videoFiles);
         listAudio.setItems(audioItems);
     }
 
