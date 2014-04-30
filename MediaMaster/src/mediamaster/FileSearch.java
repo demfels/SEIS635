@@ -53,7 +53,7 @@ ArrayList<File> returnList=new ArrayList<File>();
         for (File fil : matchingFiles)
         {   
             String filePath = fil.getPath();
-            if(filePath.contains(".wmv")){
+            if(filePath.contains(".mp4")){
                 System.out.println("[DEBUG] "+fil.getPath());
                 boolean add;
                 add = returnList.add(fil);
