@@ -32,6 +32,7 @@ public class MediaMaster extends Application {
         stage.setScene(scene);
         stage.show();
         
+        
         /*testing area*/
         //Scene sceneVideo = new Scene(new Group(), 1024, 768);
         //stage.setScene(sceneVideo);

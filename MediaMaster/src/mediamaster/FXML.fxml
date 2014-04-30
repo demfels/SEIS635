@@ -7,8 +7,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.media.MediaPlayer?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.media.Media?>
 
-<AnchorPane id="AnchorPane" prefHeight="623.0" prefWidth="767.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="mediamaster.FXMLController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="623.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/2.2" fx:controller="mediamaster.FXMLController">
   <children>
     <Button id="button" fx:id="buttonRefresh" layoutX="14.0" layoutY="547.0" onAction="#handleButtonAction" text="Refresh" />
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
@@ -48,7 +51,6 @@
     </Accordion>
     <Button fx:id="buttonOpen" layoutX="126.0" layoutY="547.0" mnemonicParsing="false" onMouseReleased="#openButtonEvent" text="Open" />
     <ImageView fx:id="imageViewWindow" fitHeight="409.5" fitWidth="546.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="14.0" />
-    <Label fx:id="infoLabel" alignment="CENTER" prefHeight="450.0" prefWidth="546.0" text="Info Center" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="83.0" />
     <Label layoutX="3.0" layoutY="41.0" prefHeight="42.0" prefWidth="764.0" text="Media Master">
       <font>
         <Font name="System Bold" size="25.0" />
@@ -75,5 +77,6 @@
         </Menu>
       </menus>
     </MenuBar>
+    <javafx.scene.media.MediaView fx:id="mediaView" layoutX="212.0" layoutY="83.0" fitHeight="450.0" fitWidth="533.0" />
   </children>
 </AnchorPane>
