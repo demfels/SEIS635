@@ -4,45 +4,47 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.media.Media?>
 <?import javafx.scene.media.MediaPlayer?>
 <?import javafx.scene.media.MediaView?>
-<?import javafx.scene.media.Media?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="623.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/2.2" fx:controller="mediamaster.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="623.0" prefWidth="767.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="mediamaster.FXMLController">
   <children>
     <Button id="button" fx:id="buttonRefresh" layoutX="14.0" layoutY="547.0" onAction="#handleButtonAction" text="Refresh" />
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
     <Accordion layoutX="0.0" layoutY="83.0" prefHeight="450.0">
       <expandedPane>
-        <TitledPane fx:id="videoPane" animated="false" minWidth="192.0" prefHeight="386.0" prefWidth="192.0" text="Video">
+        <TitledPane fx:id="imagePane" animated="false" text="Image">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <ListView fx:id="listVideo" layoutX="0.0" layoutY="0.0" prefHeight="348.0" prefWidth="200.0" />
+                <ListView fx:id="listImage" layoutX="0.0" layoutY="0.0" prefHeight="348.0" prefWidth="758.0" />
               </children>
             </AnchorPane>
           </content>
         </TitledPane>
       </expandedPane>
       <panes>
-        <fx:reference source="videoPane" />
-        <TitledPane fx:id="imagePane" animated="false" text="Image">
+        <TitledPane fx:id="videoPane" animated="false" minWidth="192.0" prefHeight="386.0" prefWidth="764.0" text="Video">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <ListView fx:id="listImage" layoutX="0.0" layoutY="-10.0" prefHeight="358.0" prefWidth="200.0" />
+                <ListView fx:id="listVideo" layoutX="0.0" layoutY="0.0" onMouseClicked="#captureSelection" prefHeight="348.0" prefWidth="758.0" />
               </children>
             </AnchorPane>
           </content>
         </TitledPane>
+        <fx:reference source="imagePane" />
         <TitledPane fx:id="audioPane" animated="false" text="Audio">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <ListView fx:id="listAudio" layoutX="0.0" layoutY="0.0" prefHeight="337.0" prefWidth="200.0" />
+                <ListView fx:id="listAudio" layoutX="0.0" layoutY="0.0" prefHeight="337.0" prefWidth="758.0" />
               </children>
             </AnchorPane>
           </content>
@@ -77,6 +79,5 @@
         </Menu>
       </menus>
     </MenuBar>
-    <javafx.scene.media.MediaView fx:id="mediaView" layoutX="212.0" layoutY="83.0" fitHeight="450.0" fitWidth="533.0" />
   </children>
 </AnchorPane>

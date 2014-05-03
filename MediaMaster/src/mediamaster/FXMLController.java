@@ -1,6 +1,5 @@
 /**
- * Sample Skeleton for "FXML.fxml" Controller Class
- * You can copy and paste this code into your favorite IDE
+ * @author daniel arnott
  **/
 
 package mediamaster;
@@ -22,12 +21,13 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 
 
 public class FXMLController {
-
+    String source="file:///C:/MediaMaster/mpeg4Sample.mp4";
+    Media media = new Media(source);
+    
+    
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -63,9 +63,6 @@ public class FXMLController {
 
     @FXML // fx:id="listVideo"
     private ListView<String> listVideo; // Value injected by FXMLLoader
-    
-    @FXML
-    private MediaView mediaView;
 
     @FXML // fx:id="menuEditImport"
     private MenuItem menuEditImport; // Value injected by FXMLLoader
@@ -86,11 +83,38 @@ public class FXMLController {
         // handle the event here
         refreshMedia();
     }
+    @FXML
+    void captureSelection(MouseEvent event) {
 
+
+    }
+    
+
+    
     // Handler for Button[fx:id="buttonOpen"] onMouseReleased
     @FXML
     void openButtonEvent(MouseEvent event) {
-        // handle the event here
+        String selectedVideo = listVideo.getSelectionModel().getSelectedItem();
+        String selectedAudio = listAudio.getSelectionModel().getSelectedItem();
+        String selectedImage = listImage.getSelectionModel().getSelectedItem();
+        File selectedFile=null;
+        if(selectedVideo!=null && selectedVideo.length()>1){
+           selectedFile  = new File(selectedVideo);
+           media = new Media(selectedFile.toURI().toASCIIString());
+            MediaWindow mediaWindow = new MediaWindow();
+            mediaWindow.showVideo(media);
+        }
+        else if(selectedAudio!=null && selectedAudio.length()>1){
+           selectedFile  = new File(selectedAudio);
+        }
+        else if(selectedImage!=null && selectedImage.length()>1){
+           selectedFile  = new File(selectedImage);
+        }
+        else{
+            media=null;
+            System.out.println("[DEBUG] Error, no selected item.");
+        }
+
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -109,25 +133,10 @@ public class FXMLController {
         assert menuFileClose != null : "fx:id=\"menuFileClose\" was not injected: check your FXML file 'FXML.fxml'.";
         assert textMediaDirectory != null : "fx:id=\"textMediaDirectory\" was not injected: check your FXML file 'FXML.fxml'.";
         assert videoPane != null : "fx:id=\"videoPane\" was not injected: check your FXML file 'FXML.fxml'.";
-        assert mediaView != null : "fx:id=\"mediaView\" was not injected: check your FXML file 'FXML.fxml'.";
         
         // Initialize your logic here: all @FXML variables will have been injected
         textMediaDirectory.setText("C:\\MediaMaster");
         refreshMedia();
-
-        String source ="file:///C:/MediaMaster/sample_mpeg4.mp4";
-        Media media = new Media(source);
-        MediaPlayer player;
-        player = new MediaPlayer(media);
-        mediaView.setMediaPlayer(player);
-        player.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-            }
-        });
-        player.setAutoPlay(true);
-        
 
 
     }
@@ -137,12 +146,15 @@ public class FXMLController {
         FileSearch fs = new FileSearch();
         ArrayList<File> list = fs.listAudio(mediaDirectory);
         String audioFiles="";
+        ObservableList<String> audioItems =FXCollections.observableArrayList (audioFiles);
+        audioItems.clear();
         for (File fil : list)
         {   
             audioFiles=audioFiles+fil.getName();
+            audioItems.add(fil.getPath());
             System.out.println(fil.getPath());
         }
-        ObservableList<String> audioItems =FXCollections.observableArrayList (audioFiles);
+        
         listAudio.setItems(audioItems);
         
 
@@ -150,12 +162,15 @@ public class FXMLController {
         FileSearch fs2 = new FileSearch();
         list = fs2.listImage(mediaDirectory);
         String imageFiles="";
+        ObservableList<String> imageItems =FXCollections.observableArrayList (imageFiles);
+        imageItems.clear();
         for (File fil : list)
         {   
             imageFiles=imageFiles+fil.getName();
+            imageItems.add(fil.getPath());
             System.out.println(fil.getPath());
         }
-        ObservableList<String> imageItems =FXCollections.observableArrayList (imageFiles);
+        
         listImage.setItems(imageItems);
         
         
@@ -163,12 +178,15 @@ public class FXMLController {
         FileSearch fs3 = new FileSearch();
         list = fs3.listVideo(mediaDirectory);
         String videoFiles="";
+        ObservableList<String> videoItems = FXCollections.observableArrayList (videoFiles);
+        videoItems.clear();
         for (File fil : list)
         {   
             videoFiles=videoFiles+fil.getName();
+            videoItems.add(fil.getPath());
             System.out.println(fil.getPath());
         }
-        ObservableList<String> videoItems =FXCollections.observableArrayList (videoFiles);
+        //ObservableList<String> videoItems =FXCollections.observableArrayList (videoFiles);
         listVideo.setItems(videoItems);
     }
     
