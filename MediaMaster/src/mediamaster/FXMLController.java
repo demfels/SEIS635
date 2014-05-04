@@ -31,7 +31,7 @@ import javax.swing.JFileChooser;
 
 
 public class FXMLController {
-    String source="file:///C:/MediaMaster/mpeg4Sample.mp4";
+    String source="";
     Media media = new Media(source);
     MediaCollection mediaCollection = new MediaCollection();
     

@@ -21,7 +21,6 @@ public class MediaWindow extends Application{
     private Stage stage = new Stage();
     public void showVideo(Media media){
         Group root = new Group();
-        //media = new Media("file:///C:/MediaMaster/mpeg4Sample.mp4");
         MediaPlayer player;
         player = new MediaPlayer(media);
         MediaView mediaView = new MediaView(player);
