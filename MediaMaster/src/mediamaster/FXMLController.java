@@ -18,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -84,9 +85,10 @@ public class FXMLController {
         refreshMedia();
     }
     @FXML
-    void captureSelection(MouseEvent event) {
-
-
+    void clearSelection(MouseEvent event) {
+        listVideo.getSelectionModel().clearSelection();
+        listAudio.getSelectionModel().clearSelection();
+        listImage.getSelectionModel().clearSelection();
     }
     
 
@@ -109,6 +111,9 @@ public class FXMLController {
         }
         else if(selectedImage!=null && selectedImage.length()>1){
            selectedFile  = new File(selectedImage);
+           Image image = new Image((selectedFile.toURI().toASCIIString()));
+           ImageWindow imageWindow = new ImageWindow();
+           imageWindow.showImage(image);
         }
         else{
             media=null;
@@ -186,7 +191,6 @@ public class FXMLController {
             videoItems.add(fil.getPath());
             System.out.println(fil.getPath());
         }
-        //ObservableList<String> videoItems =FXCollections.observableArrayList (videoFiles);
         listVideo.setItems(videoItems);
     }
     

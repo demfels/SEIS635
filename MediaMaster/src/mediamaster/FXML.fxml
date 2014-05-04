@@ -19,28 +19,7 @@
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
     <Accordion layoutX="0.0" layoutY="83.0" prefHeight="450.0">
       <expandedPane>
-        <TitledPane fx:id="imagePane" animated="false" text="Image">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-              <children>
-                <ListView fx:id="listImage" layoutX="0.0" layoutY="0.0" prefHeight="348.0" prefWidth="758.0" />
-              </children>
-            </AnchorPane>
-          </content>
-        </TitledPane>
-      </expandedPane>
-      <panes>
-        <TitledPane fx:id="videoPane" animated="false" minWidth="192.0" prefHeight="386.0" prefWidth="764.0" text="Video">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-              <children>
-                <ListView fx:id="listVideo" layoutX="0.0" layoutY="0.0" onMouseClicked="#captureSelection" prefHeight="348.0" prefWidth="758.0" />
-              </children>
-            </AnchorPane>
-          </content>
-        </TitledPane>
-        <fx:reference source="imagePane" />
-        <TitledPane fx:id="audioPane" animated="false" text="Audio">
+        <TitledPane fx:id="audioPane" animated="false" onMouseClicked="#clearSelection" onMousePressed="#clearSelection" text="Audio">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
@@ -49,6 +28,27 @@
             </AnchorPane>
           </content>
         </TitledPane>
+      </expandedPane>
+      <panes>
+        <TitledPane fx:id="videoPane" animated="false" minWidth="192.0" onMouseClicked="#clearSelection" onMousePressed="#clearSelection" prefHeight="386.0" prefWidth="764.0" text="Video">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <ListView fx:id="listVideo" layoutX="0.0" layoutY="0.0" prefHeight="348.0" prefWidth="758.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <TitledPane fx:id="imagePane" animated="false" onMouseClicked="#clearSelection" onMousePressed="#clearSelection" text="Image">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <ListView fx:id="listImage" layoutX="0.0" layoutY="0.0" prefHeight="348.0" prefWidth="758.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </TitledPane>
+        <fx:reference source="audioPane" />
       </panes>
     </Accordion>
     <Button fx:id="buttonOpen" layoutX="126.0" layoutY="547.0" mnemonicParsing="false" onMouseReleased="#openButtonEvent" text="Open" />

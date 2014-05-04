@@ -25,10 +25,14 @@ public class MediaWindow extends Application{
         MediaPlayer player;
         player = new MediaPlayer(media);
         MediaView mediaView = new MediaView(player);
+        mediaView.setFitWidth(800);
+        mediaView.setPreserveRatio(true);
+        mediaView.setSmooth(true);
+        mediaView.setCache(true);
         player.setAutoPlay(true);
         player.play();
         root.getChildren().add(mediaView);
-        Scene scene = new Scene(root, 400, 400, Color.BLACK);
+        Scene scene = new Scene(root, 800, 450, Color.BLACK);
         stage.setScene(scene);
         stage.show();
         
