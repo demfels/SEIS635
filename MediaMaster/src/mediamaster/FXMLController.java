@@ -31,8 +31,9 @@ import javax.swing.JFileChooser;
 
 
 public class FXMLController {
-    String source="";
-    Media media = new Media(source);
+    String source;
+    Media media = null;
+    //Media media = new Media(source);
     MediaCollection mediaCollection = new MediaCollection();
     
     @FXML // ResourceBundle that was given to the FXMLLoader
