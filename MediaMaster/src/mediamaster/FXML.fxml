@@ -69,7 +69,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" text="Import Media" fx:id="menuEditImport" />
+            <MenuItem mnemonicParsing="false" onAction="#importFileEvent" text="Import Media" fx:id="menuEditImport" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

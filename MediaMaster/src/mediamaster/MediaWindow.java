@@ -32,7 +32,9 @@ public class MediaWindow extends Application{
         player.setAutoPlay(true);
         player.play();
         root.getChildren().add(mediaView);
-        Scene scene = new Scene(root, 800, 450, Color.BLACK);
+        Scene scene = new Scene(root, 800, 450, Color.BLACK);       
+        MediaControl mediaControl = new MediaControl(player);
+        scene.setRoot(mediaControl);
         stage.setScene(scene);
         stage.show();
         

@@ -5,9 +5,12 @@
 package mediamaster;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,12 +25,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import javax.swing.JFileChooser;
 
 
 public class FXMLController {
     String source="file:///C:/MediaMaster/mpeg4Sample.mp4";
     Media media = new Media(source);
-    
+    MediaCollection mediaCollection = new MediaCollection();
     
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -89,10 +95,18 @@ public class FXMLController {
         listVideo.getSelectionModel().clearSelection();
         listAudio.getSelectionModel().clearSelection();
         listImage.getSelectionModel().clearSelection();
+        
     }
-    
 
-    
+    @FXML
+    void importFileEvent(ActionEvent event){
+        MediaImporter importer = new MediaImporter();
+        try {
+            importer.showFileChooser(textMediaDirectory.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     // Handler for Button[fx:id="buttonOpen"] onMouseReleased
     @FXML
     void openButtonEvent(MouseEvent event) {
@@ -108,6 +122,9 @@ public class FXMLController {
         }
         else if(selectedAudio!=null && selectedAudio.length()>1){
            selectedFile  = new File(selectedAudio);
+           media = new Media(selectedFile.toURI().toASCIIString());
+           MediaWindow mediaWindow = new MediaWindow();
+           mediaWindow.showVideo(media);
         }
         else if(selectedImage!=null && selectedImage.length()>1){
            selectedFile  = new File(selectedImage);
@@ -141,11 +158,17 @@ public class FXMLController {
         
         // Initialize your logic here: all @FXML variables will have been injected
         textMediaDirectory.setText("C:\\MediaMaster");
+        setDirectory();
         refreshMedia();
 
 
     }
+    private void setDirectory(){
+        File startDirectory = new File(textMediaDirectory.getText());
+        startDirectory.mkdirs();
+    }
     private void refreshMedia(){
+        setDirectory();
         String mediaDirectory = textMediaDirectory.getText();
         //Set audio files to list
         FileSearch fs = new FileSearch();
@@ -155,9 +178,10 @@ public class FXMLController {
         audioItems.clear();
         for (File fil : list)
         {   
-            audioFiles=audioFiles+fil.getName();
+            MediaFile mediaFile;
+            mediaFile = new MediaFile("Audio",fil.getName(),fil);
+            mediaCollection.addAudioFile(mediaFile);
             audioItems.add(fil.getPath());
-            System.out.println(fil.getPath());
         }
         
         listAudio.setItems(audioItems);
@@ -171,9 +195,10 @@ public class FXMLController {
         imageItems.clear();
         for (File fil : list)
         {   
-            imageFiles=imageFiles+fil.getName();
+            MediaFile mediaFile;
+            mediaFile = new MediaFile("Image",fil.getName(),fil);
+            mediaCollection.addImageFile(mediaFile);
             imageItems.add(fil.getPath());
-            System.out.println(fil.getPath());
         }
         
         listImage.setItems(imageItems);
@@ -187,9 +212,10 @@ public class FXMLController {
         videoItems.clear();
         for (File fil : list)
         {   
-            videoFiles=videoFiles+fil.getName();
+            MediaFile mediaFile;
+            mediaFile = new MediaFile("Video",fil.getName(),fil);
+            mediaCollection.addVideoFile(mediaFile);
             videoItems.add(fil.getPath());
-            System.out.println(fil.getPath());
         }
         listVideo.setItems(videoItems);
     }

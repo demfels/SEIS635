@@ -21,7 +21,7 @@ ArrayList<File> returnList=new ArrayList<File>();
         for (File fil : matchingFiles)
         {   
             String filePath = fil.getPath();
-            if(filePath.contains(".mp3")){
+            if(filePath.contains(".mp3") || filePath.contains(".wav")){
                 System.out.println("[DEBUG] "+fil.getPath());
                 boolean add;
                 add = returnList.add(fil);
@@ -36,7 +36,7 @@ ArrayList<File> returnList=new ArrayList<File>();
         for (File fil : matchingFiles)
         {   
             String filePath = fil.getPath();
-            if(filePath.contains(".bmp")){
+            if(filePath.contains(".bmp") || filePath.contains(".png") || filePath.contains(".jpg")){
                 System.out.println("[DEBUG] "+fil.getPath());
                 boolean add;
                 add = returnList.add(fil);
